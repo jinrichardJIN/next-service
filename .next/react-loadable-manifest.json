@@ -6,21 +6,5 @@
       "file": "static/chunks/0.js",
       "publicPath": "static/chunks/0.js"
     }
-  ],
-  "../less/index.less": [
-    {
-      "id": "./less/index.less",
-      "name": "./less/index.less",
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
-    }
-  ],
-  "undefined": [
-    {
-      "id": 4,
-      "name": null,
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
-    }
   ]
 }
