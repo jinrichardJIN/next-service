@@ -8,12 +8,19 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 function startServer(server, port) {
-    server.listen(port, error => {
-        if (error.code === "EADDRINUSE") {
-            startServer(port + 1);
-            console.log(`> Ready on http://localhost:${port}`);
-        }
-        console.log(`this port ${port} is occupied.try another.`);
+    server.on("listening", () => {
+        console.log(`the server is running on port ${port}`);
+        server.close();
+        server.listen(port, error => {
+            if (error.code === "EADDRINUSE") {
+                startServer(port + 1);
+                console.log(`> Ready on http://localhost:${port}`);
+            }
+            console.log(`this port ${port} is occupied.try another.`);
+        });
+    });
+    server.on("error", error => {
+      console.log(error);
     });
 }
 
@@ -63,10 +70,6 @@ app.prepare().then(() => {
         await next();
     });
     server.use(router.routes());
-
-    server.on("error", function(port) {
-        console.log("port=" + port);
-    });
 
     try {
         startServer(server, port);
